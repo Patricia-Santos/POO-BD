@@ -1,12 +1,15 @@
 import java.util.Set;
 
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-public class Cliente {
-	Integer id;
-	String nome;
+public class Cliente implements Identificavel  {
+	
+	@Id
+	private Integer id;
+	private String nome;
 	
 	@ManyToMany
 	@JoinTable(
