@@ -8,7 +8,7 @@
 	<persistence-unit name="salao" transaction-type="RESOURCE_LOCAL">
 		<properties>
 			<!--  Propriedades da conexão com o Banco de Dados -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:192.168.4.170:5432/POO-BD" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.4.170:5432/POO-BD" />
 			<property name="javax.persistence.jdbc.user" value="poobd" />
 			<property name="javax.persistence.jdbc.password" value="poobd" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

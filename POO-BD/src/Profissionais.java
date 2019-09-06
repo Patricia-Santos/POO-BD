@@ -12,7 +12,7 @@ public class Profissionais {
 	Integer id_servico;
 	String tipo;
 	
-	@OneToMany(mappedBy="Servico")
+	@OneToMany(mappedBy="p")
 	private Set<Servico> servicos;
 	
 	

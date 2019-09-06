@@ -1,11 +1,22 @@
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Horario {
 
+	@Id
 	Date data;
 	Time horario;
 	Boolean verifica;
+	
+	@ManyToOne
+	@JoinColumn (name = "id_c")
+	Cliente c;
 
 	public Date getData() {
 		return data;

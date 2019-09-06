@@ -1,10 +1,13 @@
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Cliente implements Identificavel  {
 	
 	@Id
@@ -19,7 +22,11 @@ public class Cliente implements Identificavel  {
 			
 			)
 	Set<Servico> servico;
-
+	
+	@OneToMany(mappedBy="c")
+	private Set<Horario> horario;
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -77,12 +84,7 @@ public class Cliente implements Identificavel  {
 		return "Cliente [id=" + id + ", nome=" + nome + ", servico=" + servico + "]";
 	}
 
-	public Cliente(Integer id, String nome, Set<Servico> servico) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.servico = servico;
-	}
+	
 
 	
 	
