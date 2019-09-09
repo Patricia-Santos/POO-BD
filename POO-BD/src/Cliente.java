@@ -8,25 +8,39 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Cliente implements Identificavel  {
-	
+public class Cliente implements Identificavel {
+
 	@Id
 	private Integer id;
 	private String nome;
-	
+	long tel;
+
 	@ManyToMany
-	@JoinTable(
-			name="Cliente_servico",
-			joinColumns = @JoinColumn(name = "Cliente_id"),
-			inverseJoinColumns = @JoinColumn(name = "Servico_id")
-			
-			)
+	@JoinTable(name = "Cliente_servico", joinColumns = @JoinColumn(name = "Cliente_id"), inverseJoinColumns = @JoinColumn(name = "Servico_id")
+
+	)
 	Set<Servico> servico;
-	
-	@OneToMany(mappedBy="c")
+
+	@OneToMany(mappedBy = "c" + "")
 	private Set<Horario> horario;
-	
-	
+
+	public Cliente(long tel) {
+		super();
+		this.tel = tel;
+	}
+
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public long getTel() {
+		return tel;
+	}
+
+	public void setTel(long tel) {
+		this.tel = tel;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -51,7 +65,6 @@ public class Cliente implements Identificavel  {
 		this.servico = servico;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -61,32 +74,14 @@ public class Cliente implements Identificavel  {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (servico == null) {
-			if (other.servico != null)
-				return false;
-		} else if (!servico.equals(other.servico))
+		if (tel != other.tel)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", servico=" + servico + "]";
+		return "Cliente [tel=" + tel + "]";
 	}
-
-	
-
-	
-	
 
 }

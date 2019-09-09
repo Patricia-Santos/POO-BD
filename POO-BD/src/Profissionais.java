@@ -11,11 +11,23 @@ public class Profissionais {
 	Integer id;
 	Integer id_servico;
 	String tipo;
-	
-	@OneToMany(mappedBy="p")
+	long tel;
+
+	@OneToMany(mappedBy = "p")
 	private Set<Servico> servicos;
-	
-	
+
+	public long getTel() {
+		return tel;
+	}
+
+	public void setTel(long tel) {
+		this.tel = tel;
+	}
+
+	public Profissionais(long tel) {
+		super();
+		this.tel = tel;
+	}
 
 	public Integer getId() {
 		return id;
@@ -50,27 +62,14 @@ public class Profissionais {
 		if (getClass() != obj.getClass())
 			return false;
 		Profissionais other = (Profissionais) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (id_servico == null) {
-			if (other.id_servico != null)
-				return false;
-		} else if (!id_servico.equals(other.id_servico))
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
+		if (tel != other.tel)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Profissionais [id=" + id + ", id_servico=" + id_servico + ", tipo=" + tipo + "]";
+		return "Profissionais [tel=" + tel + "]";
 	}
 
 	public Profissionais(Integer id, Integer id_servico, String tipo) {
