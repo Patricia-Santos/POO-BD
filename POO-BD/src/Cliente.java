@@ -1,16 +1,21 @@
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Cliente implements Identificavel {
 
 	@Id
+	@GeneratedValue(generator="cliente_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="cliente_seq", sequenceName="cliente_seq")
 	private Integer id;
 	private String nome;
 	long tel;
