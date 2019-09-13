@@ -1,4 +1,6 @@
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Implementar implements Interface {
 
@@ -18,27 +20,72 @@ public class Implementar implements Interface {
 
 	@Override
 	public Cliente removeCliente(String nome, long tel) throws TelInvalidoException {
-		// TODO Auto-generated method stub
-		return null;
+		if (nome == null || nome.equals("")) {
+			throw new NomeInvalidoException();
+		}
+		DAO<Cliente> dao = new DAO<Cliente>();
+		Cliente e = new Cliente();
+		e.setNome(nome);
+		e.setTel(tel);
+
+		dao.remove(e);
+
+		return e;
 	}
 
 	@Override
-	public Horario agendar(Time Horario, String Servico) throws HorarioInvalidoException, ServicoInvalidoException {
-		// TODO Auto-generated method stub
-		return null;
+	public Horario agendar(Cliente cliente, Calendar horario, Tiposervico tipo) throws HorarioInvalidoException {
+		Calendar hoje = new GregorianCalendar();
+		if (hoje.after(horario)) {
+			throw new HorarioInvalidoException();
+		}
+		DAO<Horario> dao = new DAO<Horario>();
+		Horario c = new Horario();
+		Cliente cl = new Cliente();
+
+		c.setC(cl);
+		c.setCalendario(hoje);
+		c.setTipo(tipo);
+
+		dao.save(c);
+
+		return c;
 	}
 
 	@Override
-	public boolean cancelar(Time Horario, String nome, long tel, String Servico)
-			throws HorarioInvalidoException, ServicoInvalidoException, NomeInvalidoException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean cancelar(Calendar horario, Cliente cliente, long tel, Tiposervico tipo) throws HorarioInvalidoException, ServicoInvalidoException, NomeInvalidoException {
+		Calendar hoje = new GregorianCalendar();
+		if (hoje.after(horario)) {
+			throw new HorarioInvalidoException();
+		}
+		DAO<Horario> dao = new DAO<Horario>();
+		Horario c = new Horario();
+		Cliente cl = new Cliente();
+		
+		c.setC(cl);
+		c.setCalendario(hoje);
+		c.setTipo(tipo);
+		
+		dao.remove(c);
+	
+		return true;
 	}
 
 	@Override
-	public Servico verifica(Time Horario) throws HorarioInvalidoException {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean verifica(Calendar horario) throws HorarioInvalidoException {
+		Calendar hoje = new GregorianCalendar();
+		if (hoje.after(horario)) {
+			throw new HorarioInvalidoException();
+		}
+		DAO<Horario> dao = new DAO<Horario>();
+		Horario c = new Horario();
+		
+		if (c != null) {
+			System.out.println(false);
+		}
+		
+
+		return true;
 	}
 
 	@Override
@@ -46,12 +93,12 @@ public class Implementar implements Interface {
 		if (nome == null || nome.equals("")) {
 			throw new NomeInvalidoException();
 		}
-		//DAO<Profissionais> dao = new DAO<Profissionais>();
+		DAO<Profissionais> dao = new DAO<Profissionais>();
 
-		//Profissionais p = new Profissionais();
-		//p.setNome(nome);
-		//p.setTel(tel);
-		//dao.save(p);
+		Profissionais p = new Profissionais();
+		p.setNome(nome);
+		p.setTel(tel);
+		dao.save(p);
 
 		return null;
 	}
@@ -61,12 +108,15 @@ public class Implementar implements Interface {
 		if (nome == null || nome.equals("")) {
 			throw new NomeInvalidoException();
 		}
-		 
-				
-		
-		
-		
-		return null;
+		DAO<Profissionais> dao = new DAO<Profissionais>();
+
+		Profissionais p = new Profissionais();
+		p.setNome(nome);
+		p.setTel(tel);
+
+		dao.remove(p);
+
+		return p;
 	}
 
 }

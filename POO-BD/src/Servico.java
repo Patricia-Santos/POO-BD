@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Servico {
+public class Servico implements Identificavel{
 	@Id
 	Integer id;
 	String nome;

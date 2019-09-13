@@ -1,18 +1,25 @@
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Horario {
+public class Horario implements Identificavel {
 
 	@Id
-	Date data;
-	Time horario;
-	
+	@GeneratedValue(generator = "horario_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "horario_seq", sequenceName = "horario_seq")
+
+	Integer id;
+
+	Tiposervico tipo;
 
 	Boolean verifica;
 
@@ -20,20 +27,22 @@ public class Horario {
 	@JoinColumn(name = "id_c")
 	Cliente c;
 
-	public Date getData() {
-		return data;
+	Calendar calendario;
+
+	public Calendar getCalendario() {
+		return calendario;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setCalendario(Calendar calendario) {
+		this.calendario = calendario;
 	}
 
-	public Time getHorario() {
-		return horario;
+	public Tiposervico getTipo() {
+		return tipo;
 	}
 
-	public void setHorario(Time horario) {
-		this.horario = horario;
+	public void setTipo(Tiposervico tipo) {
+		this.tipo = tipo;
 	}
 
 	public Boolean getVerifica() {
@@ -44,15 +53,20 @@ public class Horario {
 		this.verifica = verifica;
 	}
 
-	
+	public Integer getId() {
+		return id;
+	}
 
-	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-	public Horario(Date data, Time horario, Boolean verifica) {
-		super();
-		this.data = data;
-		this.horario = horario;
-		this.verifica = verifica;
+	public Cliente getC() {
+		return c;
+	}
+
+	public void setC(Cliente c) {
+		this.c = c;
 	}
 
 }

@@ -1,20 +1,38 @@
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Profissionais {
+public class Profissionais implements Identificavel{
+	
 	@Id
-	Integer id;
-	Integer id_servico;
-	String tipo;
-	long tel;
+	@GeneratedValue(generator="profissionais_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="profissionais_seq", sequenceName="profissionais_seq")
+	private Integer id;
+	private String nome;
+	private Integer id_servico;
+	private String tipo;
+	private long tel;
 
 	@OneToMany(mappedBy = "p")
 	private Set<Servico> servicos;
+
+	
+	
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public long getTel() {
 		return tel;
@@ -24,10 +42,6 @@ public class Profissionais {
 		this.tel = tel;
 	}
 
-	public Profissionais(long tel) {
-		super();
-		this.tel = tel;
-	}
 
 	public Integer getId() {
 		return id;
@@ -53,6 +67,7 @@ public class Profissionais {
 		this.tipo = tipo;
 	}
 
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -62,21 +77,43 @@ public class Profissionais {
 		if (getClass() != obj.getClass())
 			return false;
 		Profissionais other = (Profissionais) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (id_servico == null) {
+			if (other.id_servico != null)
+				return false;
+		} else if (!id_servico.equals(other.id_servico))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (servicos == null) {
+			if (other.servicos != null)
+				return false;
+		} else if (!servicos.equals(other.servicos))
+			return false;
 		if (tel != other.tel)
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Profissionais [tel=" + tel + "]";
+		return "Profissionais [id=" + id + ", nome=" + nome + ", id_servico=" + id_servico + ", tipo=" + tipo + ", tel="
+				+ tel + ", servicos=" + servicos + "]";
 	}
 
-	public Profissionais(Integer id, Integer id_servico, String tipo) {
-		super();
-		this.id = id;
-		this.id_servico = id_servico;
-		this.tipo = tipo;
-	}
+	
+
 
 }
